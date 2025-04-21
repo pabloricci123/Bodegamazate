@@ -1,0 +1,5 @@
+Producto,Unidad de Medida,Tipo de Producto,Stock Inicial,Stock Minimo
+Ladrillo,unidad,Material,999,100
+Arena,kg,Material,4972,200
+Saco de cemento la buena,unidad,Material,198,20
+Acero,kg,Material,300,30

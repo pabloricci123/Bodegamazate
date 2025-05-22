@@ -399,7 +399,7 @@ def mostrar_despachos(despachos_df):
         col1, col2 = st.columns(2)
         
         with col1:
-            buscador = st.text_input("Buscar por Cliente o N° Pedido")
+            buscador = st.text_input("Buscar por Cliente o N° Pedido", value="")
         
         with col2:
             fecha_inicio = st.date_input("Fecha inicio", value=datetime.today().replace(day=1))
@@ -408,12 +408,13 @@ def mostrar_despachos(despachos_df):
     # Aplicar filtros
     filtrado = despachos_df.copy()
     
-if buscador:
-    mask = (
-        filtrado['Cliente'].str.contains(buscador, case=False) | 
-        filtrado['Número de Pedido'].astype(str).str.contains(buscador)
-    )
-    filtrado = filtrado[mask]
+    # Check if buscador exists and has value
+    if 'buscador' in locals() and buscador and str(buscador).strip():
+        mask = (
+            filtrado['Cliente'].str.contains(buscador, case=False, na=False) | 
+            filtrado['Número de Pedido'].astype(str).str.contains(buscador, case=False, na=False)
+        )
+        filtrado = filtrado[mask]
     
     if fecha_inicio and fecha_fin:
         filtrado = filtrado[

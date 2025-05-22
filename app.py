@@ -408,11 +408,12 @@ def mostrar_despachos(despachos_df):
     # Aplicar filtros
     filtrado = despachos_df.copy()
     
-    if buscador:
-        mask = (
-            filtrado['Cliente'].str.contains(buscador, case=False) | 
-            filtrado['Número de Pedido'].astype(str).str.contains(buscador)
-        filtrado = filtrado[mask]
+if buscador:
+    mask = (
+        filtrado['Cliente'].str.contains(buscador, case=False) | 
+        filtrado['Número de Pedido'].astype(str).str.contains(buscador)
+    )
+    filtrado = filtrado[mask]
     
     if fecha_inicio and fecha_fin:
         filtrado = filtrado[

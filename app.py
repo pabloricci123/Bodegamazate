@@ -249,10 +249,21 @@ def editar_producto(productos_df):
             
             with col1:
                 nuevo_nombre = st.text_input("Nombre", value=data['Producto'])
+                # Fix: Use the exact column name from your DataFrame
+                unidad_medida = data['Unidad de Medida']  # or whatever the exact column name is
+                unidades_posibles = ["Unidades", "Kg", "Litros", "Cajas", "Paquetes"]
+                
+                # Handle case where unit might not be in our list
+                try:
+                    indice_unidad = unidades_posibles.index(unidad_medida)
+                except ValueError:
+                    indice_unidad = 0
+                    st.warning(f"Unidad de medida '{unidad_medida}' no está en la lista predefinida")
+                
                 nueva_unidad = st.selectbox(
                     "Unidad de Medida",
-                    ["Unidades", "Kg", "Litros", "Cajas", "Paquetes"],
-                    index=["Unidades", "Kg", "Litros", "Cajas", "Paquetes"].index(data['Unidad de Medida'])
+                    unidades_posibles,
+                    index=indice_unidad
                 )
             
             with col2:

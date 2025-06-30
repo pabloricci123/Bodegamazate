@@ -96,9 +96,9 @@ def cargar_datos():
         )
 
 # ================================================
-<<<<<<< HEAD
+
 # FUNCIONES DE IMPORTACIÓN/EXPORTACIÓN (ORIGINAL)
-=======
+
 # FUNCIONES DE IMPORTACIÓN/EXPORTACIÓN
 # ================================================
 

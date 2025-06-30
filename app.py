@@ -54,10 +54,7 @@ def get_file_path(filename):
     else:
         base_path = os.path.join(os.path.dirname(__file__), 'datos')
     
-<<<<<<< HEAD
-=======
-    # Crear directorio si no existe
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
     if not os.path.exists(base_path):
         os.makedirs(base_path)
     
@@ -65,10 +62,7 @@ def get_file_path(filename):
 
 def cargar_datos():
     try:
-<<<<<<< HEAD
-=======
-        # Crear archivos si no existen
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
         if not os.path.exists(get_file_path('productos.csv')):
             pd.DataFrame(columns=['Producto', 'Unidad de Medida', 'Tipo de Producto', 'Stock Inicial', 'Stock Minimo']).to_csv(get_file_path('productos.csv'), index=False)
         

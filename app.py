@@ -308,11 +308,10 @@ def exportar_datos(productos_df, entradas_df, despachos_df):
 # ================================================
 def mostrar_productos(productos_df):
     st.subheader("Inventario de Productos")
-<<<<<<< HEAD
-=======
+
     
     # Mostrar métricas resumidas
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
     col1, col2, col3 = st.columns(3)
     with col1:
         st.metric("Total Productos", len(productos_df))
@@ -322,10 +321,9 @@ def mostrar_productos(productos_df):
         bajo_stock = productos_df[productos_df['Stock Inicial'] <= productos_df['Stock Minimo']]
         st.metric("Productos bajo stock", len(bajo_stock))
     
-<<<<<<< HEAD
-=======
+
     # Mostrar tabla con todos los productos
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
     st.dataframe(productos_df.style.applymap(
         lambda x: 'background-color: #ffcccc' if x <= productos_df['Stock Minimo'].iloc[0] else '', 
         subset=['Stock Inicial']

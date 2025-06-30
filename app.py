@@ -208,7 +208,7 @@ def exportar_datos(productos_df, entradas_df, despachos_df):
 
 # ================================================
 # FUNCIONES DE LA APLICACIÓN (MEJORADAS)
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
 # ================================================
 def importar_datos():
     st.subheader("Importar Datos")
@@ -331,37 +331,25 @@ def mostrar_productos(productos_df):
         subset=['Stock Inicial']
     ))
     
-<<<<<<< HEAD
-=======
-    # Mostrar productos con stock bajo
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
     if not bajo_stock.empty:
         st.warning("Productos con Stock Bajo el Mínimo")
         st.dataframe(bajo_stock)
 
 def agregar_producto(productos_df):
     st.subheader("Agregar Nuevo Producto")
-<<<<<<< HEAD
-=======
-    
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
     with st.expander("O importar desde archivo", expanded=False):
         importar_datos()
     
     with st.form("producto_form", clear_on_submit=True):
         col1, col2 = st.columns(2)
-<<<<<<< HEAD
-=======
-        
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
         with col1:
             nombre = st.text_input("Nombre del Producto*", help="Nombre descriptivo del producto")
             unidad = st.selectbox("Unidad de Medida*", ["Unidades", "Kg", "Litros", "Cajas", "Paquetes"])
             tipo = st.text_input("Tipo de Producto", help="Categoría o tipo del producto")
-<<<<<<< HEAD
-=======
-        
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
         with col2:
             stock_inicial = st.number_input("Stock Inicial*", 0, step=1, value=0)
             stock_minimo = st.number_input("Stock Mínimo*", 0, step=1, value=0)
@@ -387,10 +375,7 @@ def agregar_producto(productos_df):
 
 def editar_producto(productos_df):
     st.subheader("Editar Producto Existente")
-<<<<<<< HEAD
-=======
-    
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
     seleccion = st.selectbox("Seleccionar Producto a Editar", productos_df['Producto'])
     
     if seleccion:
@@ -398,12 +383,12 @@ def editar_producto(productos_df):
         
         with st.form("editar_form"):
             col1, col2 = st.columns(2)
-<<<<<<< HEAD
+
             with col1:
                 nuevo_nombre = st.text_input("Nombre", value=data['Producto'])
                 unidad_medida = data['Unidad de Medida']
                 unidades_posibles = ["Unidades", "Kg", "Litros", "Cajas", "Paquetes"]
-=======
+
             
             with col1:
                 nuevo_nombre = st.text_input("Nombre", value=data['Producto'])
@@ -412,15 +397,15 @@ def editar_producto(productos_df):
                 unidades_posibles = ["Unidades", "Kg", "Litros", "Cajas", "Paquetes"]
                 
                 # Handle case where unit might not be in our list
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
                 try:
                     indice_unidad = unidades_posibles.index(unidad_medida)
                 except ValueError:
                     indice_unidad = 0
                     st.warning(f"Unidad de medida '{unidad_medida}' no está en la lista predefinida")
-<<<<<<< HEAD
+
                 nueva_unidad = st.selectbox("Unidad de Medida", unidades_posibles, index=indice_unidad)
-=======
+
                 
                 nueva_unidad = st.selectbox(
                     "Unidad de Medida",
@@ -428,7 +413,7 @@ def editar_producto(productos_df):
                     index=indice_unidad
                 )
             
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
             with col2:
                 nuevo_stock = st.number_input("Stock Actual", value=int(data['Stock Inicial']), min_value=0)
                 nuevo_minimo = st.number_input("Stock Mínimo", value=int(data['Stock Minimo']), min_value=0)
@@ -447,13 +432,13 @@ def editar_producto(productos_df):
 
 def registrar_entrada(productos_df, entradas_df):
     st.subheader("Registrar Entrada de Productos")
-<<<<<<< HEAD
+
     with st.form("entrada_form", clear_on_submit=True):
         col1, col2 = st.columns(2)
         with col1:
             producto = st.selectbox("Producto*", productos_df['Producto'])
             cantidad = st.number_input("Cantidad*", 1, step=1)
-=======
+
     
     with st.form("entrada_form", clear_on_submit=True):
         col1, col2 = st.columns(2)
@@ -462,7 +447,7 @@ def registrar_entrada(productos_df, entradas_df):
             producto = st.selectbox("Producto*", productos_df['Producto'])
             cantidad = st.number_input("Cantidad*", 1, step=1)
         
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
         with col2:
             fecha = st.date_input("Fecha*", value=datetime.today())
             motivo = st.text_input("Motivo (opcional)", help="Ej: Compra, Donación, etc.")
@@ -476,26 +461,24 @@ def registrar_entrada(productos_df, entradas_df):
                 "Fecha": fecha,
                 "Motivo": motivo
             }])
-<<<<<<< HEAD
-=======
+
             
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
             entradas_df = pd.concat([entradas_df, nueva_entrada], ignore_index=True)
             productos_df.loc[productos_df['Producto'] == producto, 'Stock Inicial'] += cantidad
             
             entradas_df.to_csv(get_file_path('entradas.csv'), index=False)
             productos_df.to_csv(get_file_path('productos.csv'), index=False)
-<<<<<<< HEAD
-=======
+
             
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
             st.success(f"Entrada de {cantidad} unidades para '{producto}' registrada correctamente!")
             time.sleep(1)
             st.rerun()
 
 def registrar_despacho(productos_df, despachos_df):
     st.subheader("Registrar Despacho")
-<<<<<<< HEAD
+
     if "despacho_data" not in st.session_state:
         st.session_state.despacho_data = {
             "cliente": "",
@@ -509,7 +492,7 @@ def registrar_despacho(productos_df, despachos_df):
         with col1:
             cliente = st.text_input("Cliente*", value=st.session_state.despacho_data["cliente"])
             fecha = st.date_input("Fecha de Despacho*", value=datetime.today())
-=======
+
     
     if "despacho_data" not in st.session_state:
         st.session_state.despacho_data = {
@@ -526,26 +509,24 @@ def registrar_despacho(productos_df, despachos_df):
             cliente = st.text_input("Cliente*", value=st.session_state.despacho_data["cliente"])
             fecha = st.date_input("Fecha de Despacho*", value=datetime.today())
         
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
         with col2:
             numero_pedido = st.text_input("Número de Pedido*", value=st.session_state.despacho_data["numero_pedido"])
         
         st.divider()
-<<<<<<< HEAD
-=======
+
         
         # Selección de productos
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
         productos_seleccionados = st.multiselect(
             "Productos a Despachar",
             productos_df['Producto'],
             default=st.session_state.despacho_data["productos"]
         )
         
-<<<<<<< HEAD
-=======
+
         # Cantidades por producto
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
         cantidades = {}
         for p in productos_seleccionados:
             stock = productos_df.loc[productos_df['Producto'] == p, 'Stock Inicial'].values[0]
@@ -556,17 +537,17 @@ def registrar_despacho(productos_df, despachos_df):
             )
         
         st.markdown("(*) Campos obligatorios")
-<<<<<<< HEAD
+
         submitted = st.form_submit_button("Registrar Despacho")
         
         if submitted:
-=======
+
         
         submitted = st.form_submit_button("Registrar Despacho")
         
         if submitted:
             # Validaciones
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
             if not cliente or not numero_pedido or not productos_seleccionados:
                 st.error("Por favor complete todos los campos obligatorios")
                 return
@@ -575,10 +556,7 @@ def registrar_despacho(productos_df, despachos_df):
                 st.warning("¡Este número de pedido ya existe!")
                 return
             
-<<<<<<< HEAD
-=======
-            # Registrar el despacho
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
             nuevos_despachos = []
             for p in productos_seleccionados:
                 cantidad = cantidades[p]
@@ -593,11 +571,11 @@ def registrar_despacho(productos_df, despachos_df):
                 productos_df.loc[productos_df['Producto'] == p, 'Stock Inicial'] -= cantidad
             
             despachos_df = pd.concat([despachos_df, pd.DataFrame(nuevos_despachos)], ignore_index=True)
-<<<<<<< HEAD
+
             despachos_df.to_csv(get_file_path('despachos.csv'), index=False)
             productos_df.to_csv(get_file_path('productos.csv'), index=False)
             st.success("Despacho registrado exitosamente!")
-=======
+
             
             # Guardar los datos
             despachos_df.to_csv(get_file_path('despachos.csv'), index=False)
@@ -606,7 +584,7 @@ def registrar_despacho(productos_df, despachos_df):
             st.success("Despacho registrado exitosamente!")
             
             # Limpiar el formulario
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
             st.session_state.despacho_data = {
                 "cliente": "",
                 "numero_pedido": "",
@@ -618,7 +596,7 @@ def registrar_despacho(productos_df, despachos_df):
 
 def mostrar_despachos(despachos_df):
     st.subheader("Historial de Despachos")
-<<<<<<< HEAD
+
     with st.expander("Filtros", expanded=True):
         col1, col2 = st.columns(2)
         with col1:
@@ -628,7 +606,7 @@ def mostrar_despachos(despachos_df):
             fecha_fin = st.date_input("Fecha fin", value=datetime.today())
     
     filtrado = despachos_df.copy()
-=======
+
     
     # Filtros
     with st.expander("Filtros", expanded=True):
@@ -645,7 +623,7 @@ def mostrar_despachos(despachos_df):
     filtrado = despachos_df.copy()
     
     # Check if buscador exists and has value
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
     if 'buscador' in locals() and buscador and str(buscador).strip():
         mask = (
             filtrado['Cliente'].str.contains(buscador, case=False, na=False) | 
@@ -659,17 +637,17 @@ def mostrar_despachos(despachos_df):
             (pd.to_datetime(filtrado['Fecha']).dt.date <= fecha_fin)
         ]
     
-<<<<<<< HEAD
+
     if not filtrado.empty:
         st.write(f"Mostrando {len(filtrado)} despachos entre {fecha_inicio} y {fecha_fin}")
-=======
+
     # Mostrar resultados
     if not filtrado.empty:
         # Resumen estadístico
         st.write(f"Mostrando {len(filtrado)} despachos entre {fecha_inicio} y {fecha_fin}")
         
         # Agrupar por cliente
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
         grouped = filtrado.groupby('Cliente').agg({
             'Cantidad': 'sum',
             'Número de Pedido': 'nunique'
@@ -677,11 +655,11 @@ def mostrar_despachos(despachos_df):
             'Cantidad': 'Total Unidades',
             'Número de Pedido': 'Total Pedidos'
         })
-<<<<<<< HEAD
+
         st.dataframe(grouped.sort_values('Total Unidades', ascending=False))
         st.dataframe(filtrado.sort_values('Fecha', ascending=False))
         
-=======
+
         
         st.dataframe(grouped.sort_values('Total Unidades', ascending=False))
         
@@ -689,7 +667,7 @@ def mostrar_despachos(despachos_df):
         st.dataframe(filtrado.sort_values('Fecha', ascending=False))
         
         # Opción de exportación
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
         if st.button("Exportar a Excel"):
             with tempfile.NamedTemporaryFile(delete=False, suffix='.xlsx') as tmp:
                 filtrado.to_excel(tmp.name, index=False)
@@ -703,30 +681,29 @@ def mostrar_despachos(despachos_df):
         st.warning("No se encontraron despachos con los filtros aplicados")
 
 # ================================================
-<<<<<<< HEAD
+
 # INTERFAZ PRINCIPAL (MODIFICADA CON AUTENTICACIÓN)
-=======
+
 # INTERFAZ PRINCIPAL MEJORADA
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
 # ================================================
 def pagina_principal():
     st.set_page_config(page_title="Gestión de Bodega", layout="wide", page_icon="📦")
     
-<<<<<<< HEAD
+
     # Verificar autenticación
     if 'autenticado' not in st.session_state or not st.session_state['autenticado']:
         pagina_login()
         return
     
-=======
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
     # Cargar datos
     productos_df, entradas_df, despachos_df = cargar_datos()
     
     # Sidebar
     with st.sidebar:
         st.image("https://via.placeholder.com/150x50?text=MiBodega", width=150)
-<<<<<<< HEAD
+
         st.title(f"Menú ({st.session_state['rol']})")
         
         # Menú según rol
@@ -744,7 +721,7 @@ def pagina_principal():
                 icons=None,
                 default_index=0
             )
-=======
+
         st.title("Menú Principal")
         
         menu = option_menu(
@@ -753,13 +730,13 @@ def pagina_principal():
             icons=None,
             default_index=0
         )
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
         
         st.divider()
         st.write(f"**Total Productos:** {len(productos_df)}")
         st.write(f"**Stock Total:** {productos_df['Stock Inicial'].sum()}")
         st.write(f"**Última Entrada:** {entradas_df['Fecha'].max() if not entradas_df.empty else 'N/A'}")
-<<<<<<< HEAD
+
         
         if st.button("🔒 Cerrar Sesión"):
             st.session_state.clear()
@@ -779,7 +756,7 @@ def pagina_principal():
                         agregar_producto(productos_df)
                     with tab3:
                         editar_producto(productos_df)
-=======
+
     
     # Página principal
     st.title("📦 Gestión de Bodega")
@@ -795,14 +772,14 @@ def pagina_principal():
         
         with tab3:
             editar_producto(productos_df)
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
     
     elif menu == "📥 Entradas":
         registrar_entrada(productos_df, entradas_df)
     
     elif menu == "📤 Despachos":
         tab1, tab2 = st.tabs(["Registrar Despacho", "Historial"])
-<<<<<<< HEAD
+
         with tab1:
             registrar_despacho(productos_df, despachos_df)
         with tab2:
@@ -812,7 +789,7 @@ def pagina_principal():
         tab1, tab2 = st.tabs(["Importar Datos", "Exportar Datos"])
         with tab1:
             importar_datos()
-=======
+
         
         with tab1:
             registrar_despacho(productos_df, despachos_df)
@@ -826,7 +803,7 @@ def pagina_principal():
         with tab1:
             importar_datos()
         
->>>>>>> 962c617243b1000fdecb0d1344c6a09ebc5096ca
+
         with tab2:
             exportar_datos(productos_df, entradas_df, despachos_df)
 
